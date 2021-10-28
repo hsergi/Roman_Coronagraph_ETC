@@ -1,0 +1,6 @@
+r_lam_D,REQ_ExtContStab,REQ_IntContStab,REQ_AvgRawContrast,REQ_InitStatContrast,ICBE_ExtContStab,ICBE_IntContStab,ICBE_AvgRawContrast,ICBE_InitStatContrast,MCBE_ExtContStab,MCBE_IntContStab,MCBE_AvgRawContrast,MCBE_InitStatContrast
+6,-1,-1,-1,-1,-1,-1,-1,-1,0.09,0.1,5.03,5
+7,-1,-1,-1,-1,-1,-1,-1,-1,0.08,0.11,2.52,2.5
+8,-1,-1,-1,-1,-1,-1,-1,-1,0.04,0.07,1.12,1.1
+19,-1,-1,-1,-1,-1,-1,-1,-1,0.17,0.35,5.04,5
+# Comments:,"Unity mufs, Science CBE, total tip-tilt jitter 1 mas rms/axis.   All must be considered provisional, depending on the assumed initial raw contrast, which needs to be revisited. ",,,,,,,,,,,
