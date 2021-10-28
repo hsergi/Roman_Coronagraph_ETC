@@ -1,4 +1,5 @@
 # Scope
+**10/28/21**: coming soon with target accessibility
 
 This directory contains some figures related with the results for 
   reflected light exoplanets. This output is optional. 
@@ -10,4 +11,3 @@ This directory contains some figures related with the results for
 `scripts/cgi_etc_rv_shortest_integration_time.py` 
   for more information.
 
-**10/28/21**: coming soon with target accessibility
