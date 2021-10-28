@@ -160,9 +160,11 @@ The exposure time calculator allows
 
   - Reflected light exoplanets: `targetType: 'reflected light'`
 
-  - Exodust targets: `targetType: 'exo dust'`
+  - Exodust targets: `targetType: 'exo dust'`.
 
 More details about each of them can be found in the next sections.
+We also provide some guidance about polarimetric observations:
+[Polarization](#polarization)
 
 ## Self Luminous Exoplanets
 
@@ -387,6 +389,21 @@ Finally, notice that sometimes one has an estimation
 __Remember that the above expressions may need to be integrated spatially__
 __if the disk and/or PSF characteristics vary significantly within the
 area of interest.__
+
+## Polarization
+
+Polarization with the Roman Coronagraph Instrument can be
+approached in the following way for first order estimations:
+
+- Convert the surface brightness of the source into an equivalent magnitude 
+per resel, see [Exodust Targets](#exodust-targets).
+
+- Take a factor of 2 hit in transmission from the polarizer
+
+- The Signal-to-Noise requirement is nominally 100:1 per resel per single 
+linear polarization which gives a required exposure time per Wollaston prism 
+per telescope roll. Because there are two prisms and two rolls involved,
+the exposure time will indeed be 4x longer than that estimate.
 
 # Limitations
 
