@@ -1,0 +1,3 @@
+Generation,DetEOL_mos,PixelSize_m,PixelsAcross_pix,isPC_bool,ReadNoise_e,EM_gain,CRtailLen_gain,PCThreshold,Dark1,Dark2,CTE_dqeFluxSlope,CTE_dqeKnee,CTE_dqeKneeFlux,CIC1,CIC2,CIC3,CIC4,HotPixFrac,CRtailLen1,CRtailLen2
+2,63,0.000013,1024,1,242,5000,125,500,0.81,1.28,3.24,0.858,0.089,0.8,0.005,4500,0.01,0.05,0.01615,66.75
+# Comments: Updated CBE to reflect the JPL measurements of read noise reported 1/27 at AVS CDR,,,,,,,,,,,,,,,,,,,,
