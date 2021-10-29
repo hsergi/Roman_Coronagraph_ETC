@@ -27,11 +27,16 @@ from scripts.cgi_etc_rv_shortest_integration_time import cgi_etc_rv_shortest_int
 # I set off the warning temporarily
 np.seterr(divide='ignore', invalid='ignore')
 
+# Make a local copy
+dir_cgi_etc = INSTALLATION_PATH
+if dir_cgi_etc[-1] != '/':
+    dir_cgi_etc += '/'
+
 # json file (EXOSIMS)
-jsonFile = INSTALLATION_PATH + 'json/cgi_etc_exosims.json'
+jsonFile = dir_cgi_etc + 'json/cgi_etc_exosims.json'
 
 # hjson file
-hjsonFile = INSTALLATION_PATH + 'json/cgi_etc_setup.hjson'
+hjsonFile = dir_cgi_etc + 'json/cgi_etc_setup.hjson'
 
 # Read parameters related to observations
 with open(hjsonFile, 'r') as initIn:
@@ -47,11 +52,11 @@ if CGI_targetType.lower() != 'exo dust' and \
     CGI_targetType.lower() != 'self luminous' and \
     CGI_targetType.lower() != 'reflected light':
     
-    raise Exception('>> Please choose either self luminous, exodust, or ' + \
+    raise Exception('>> Please choose either self luminous, exo dust, or ' + \
         'radial velocity for targetType in the setup file')
 
 # Create the folder for output results
-dir_out = INSTALLATION_PATH + 'output/'
+dir_out = dir_cgi_etc + 'output/'
 if os.path.exists(dir_out) == False:
     os.mkdir(dir_out)
     
@@ -75,5 +80,5 @@ if CGI_targetType.lower() == 'reflected light':
 
 print('\n---------------------------------------')
 print(' Estimated integration times written in: ' + \
-    f"{INSTALLATION_PATH + 'output/csv/' + csvFileName + '.csv':s}")
+    f"{dir_cgi_etc + 'output/csv/' + csvFileName + '.csv':s}")
 print('---------------------------------------\n')

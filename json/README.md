@@ -430,7 +430,7 @@ the exposure time will indeed be 4x longer than that estimate.
     accordingly (recall to create a new branch)
 
 - In the case of `Reflected Light Exoplanets`, the orbital data are
-  retrieved from [Imaging MIssion Database](https://plandb.sioslab.com/index.php).
+  retrieved from [Imaging Mission Database](https://plandb.sioslab.com/index.php).
     Any type of limitations in Imaging Mission Database are inherited into
     `Roman_Coronagraph_ETC`. 
     If this is a limitation, let's recall that one can use the case of 
