@@ -1,4 +1,4 @@
-![](Roman_Coronagraph_ETC.png)
+![](logo_Roman_Coronagraph_ETC.png)
 Roman Coronagraph Exposure Time Calculator
 
 # Scope of the Roman Coronagraph Exposure Time Calculator
@@ -27,6 +27,11 @@ The Roman Coronagraph Exposure Time Calculator
 - Move to the directory where `Roman_Coronagraph_ETC` is installed
 
 - Verify that `scripts/config.py` has your local installation path
+
+- Verify that you have copied `json/cgi_etc_setup_ref.hjson` to
+    `json/cgi_etc_setup.hjson` and `json/cgi_etc_exosims_ref.json`
+    to `json/cgi_etc_exosims.json`, see 
+  [Installation Notes](#installation-notes)
 
 - Activate conda's environment: 
     `conda activate <your_roman_coronagraph_etc_environment>`
@@ -154,6 +159,16 @@ other than `$HOME`. Pick up python 3.7 or more recent
 ```
    - Verify `<INSTALLATION_PATH>` is the installation 
        path of `Roman_Coronagraph_ETC`. Otherwise, edit `config.py` accordingly
+
+  - Make a local copy of the setup files in `json/`:
+    
+    - `cp json/cgi_etc_setup_ref.hjson json/cgi_etc_setup.hjson`
+
+    - `cp json/cgi_etc_exosims_ref.json json/cgi_etc_exosims.json`
+
+    - `json/cgi_etc_setup.hjson` and `json/cgi_etc_setup.hjson` are
+        the setup files that the user will edit, not the ones with `_ref`,
+        which are part of git
 
   - If there is an issue importing EXOSIMS, follow these steps 
     (needed only once). Add 

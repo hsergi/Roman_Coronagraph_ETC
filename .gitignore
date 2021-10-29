@@ -1,6 +1,8 @@
 config.py
 **/__pycache__
 imd/*.csv
+json/cgi_etc_setup.hjson
+json/cgi_etc_exosims.json
 output/csv/*.csv
 output/figures/*.png
 

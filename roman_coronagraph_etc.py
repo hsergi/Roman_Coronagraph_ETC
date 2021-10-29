@@ -34,9 +34,17 @@ if dir_cgi_etc[-1] != '/':
 
 # json file (EXOSIMS)
 jsonFile = dir_cgi_etc + 'json/cgi_etc_exosims.json'
+# Make sure the file exists
+if os.path.exists(jsonFile) == False:
+    raise Exception("Copy json/cgi_etc_exosims_ref.json to " + \
+        "json/cgi_etc_exosims.json (version for user's edits)")
 
 # hjson file
 hjsonFile = dir_cgi_etc + 'json/cgi_etc_setup.hjson'
+# Make sure the file exists
+if os.path.exists(hjsonFile) == False:
+    raise Exception("Copy json/cgi_etc_setup_ref.hjson to " + \
+        "json/cgi_etc_setup.hjson (version for user's edits)")
 
 # Read parameters related to observations
 with open(hjsonFile, 'r') as initIn:
