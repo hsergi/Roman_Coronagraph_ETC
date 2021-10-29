@@ -5,7 +5,7 @@
   # Filename for the output CSV file (.csv is not needed)
   csvFileName: 'test'
   # Type of target: 'self luminous' (exoplanets), 'reflected light' (exoplanets), or 'exo dust'. P.S. Case insensitive.
-  targetType: 'self luminous'
+  targetType: 'reflected light'
   # Starting and ending Epochs to be considered
   # P.S. The notional allocation for the Tech Demo of the coronagraph
   # is 90 days spread along 18 months after Comissioning. That is 

@@ -35,8 +35,12 @@ def cgi_etc_update_specs(jsonFile, filter, CGI_epoch0, CGI_epoch1):
         specs2['ppFact'] = 1/2.00 # Until there are OS simulations with these mode
     # Record the actual value of the ppFact used
     kpp_tmp = 1 / specs2['ppFact']
+    # Make a local copy
+    dir_cgi_etc = INSTALLATION_PATH
+    if dir_cgi_etc[-1] != '/':
+        dir_cgi_etc += '/'
     # Writing temporary json file
-    json_dir_tmp = INSTALLATION_PATH + 'json/tmp/'
+    json_dir_tmp = dir_cgi_etc + 'json/tmp/'
     if os.path.exists(json_dir_tmp) == False:
         os.mkdir(json_dir_tmp)
     jsonFile_tmp = json_dir_tmp + 'cgi_etc_exosims_tmp_' + filter + '_' + \

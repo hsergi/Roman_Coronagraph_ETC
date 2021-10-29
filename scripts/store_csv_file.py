@@ -230,8 +230,8 @@ def store_csv_file_rv(filterList, kppList, PName,
                         decimals=3))
 
     for filter in range(len(filterList)):
-        if (filterList[filter] == 'EB_WF_Imager' \
-                or filterList[filter] == 'DRM_WF_Imager'):
+        if (filterList[filter] == 'CONS_WF_Imager' \
+                or filterList[filter] == 'OPTI_WF_Imager'):
             dictCI[filterList[filter]+f' (kpp={kppList[filter]:0.2f})'] = \
             [''] * len(PName)
             dictCI[f'DoM_{filterList[filter]:s}'] = \
