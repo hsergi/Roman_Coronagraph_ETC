@@ -116,6 +116,10 @@ The next sections explain the different types of variables.
         uncertainty factors. The actual IWA/OWA 
         can be found in `json/cgi_etc_exosims.json`.
 
+The particular values for the model uncertainty factors, as well as other
+    more specific instrumental parameters used in `cgi_exosims.json`
+   can be found in the [tables](../tables/#README) directory
+
 In summary, a possible choice for `filterList` could be `CONS_NF_Imager`
 for instance. One may specify a list of choices: [`CONS_NF_Imager`, 
 `OPTI_NF_Imager`, `CONS_WF_Imager`], etc.
