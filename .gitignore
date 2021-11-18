@@ -5,6 +5,7 @@ config.py
 imd/*.csv
 json/cgi_etc_setup.hjson
 json/cgi_etc_exosims.json
+json/tmp/*.json
 output/csv/*.csv
 output/figures/*.png
 
