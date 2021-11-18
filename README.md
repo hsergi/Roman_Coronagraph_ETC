@@ -143,7 +143,12 @@ other than `$HOME`. Pick up python 3.7 or more recent
     choosing any `local path` of your preference: for instance, you
     can choose/create `/Users/user_name/.../GitHub/` or _any_ other directory 
 
-  - Open a terminal session, move to its installation directory. Edit `config.py`, 
+  - Open a terminal session, move to its installation directory, and 
+    make this local copy of `config_ref.py`:
+
+    - `cp config_ref.py config.py`
+
+    Edit `config.py`, which will not be traced by git,
     and set `INSTALLATION_PATH` to the full installation path. 
     For instance, following the suggestion before:
     `INSTALLATION_PATH=/Users/user_name/.../GitHub/Roman_Coronagraph_ETC/`
@@ -160,13 +165,13 @@ other than `$HOME`. Pick up python 3.7 or more recent
    - Verify `<INSTALLATION_PATH>` is the installation 
        path of `Roman_Coronagraph_ETC`. Otherwise, edit `config.py` accordingly
 
-  - Make a local copy of the setup files in `json/`:
+  - Make this local copy of the setup files in `json/`:
     
     - `cp json/cgi_etc_setup_ref.hjson json/cgi_etc_setup.hjson`
 
     - `cp json/cgi_etc_exosims_ref.json json/cgi_etc_exosims.json`
 
-    - `json/cgi_etc_setup.hjson` and `json/cgi_etc_setup.hjson` are
+    `json/cgi_etc_setup.hjson` and `json/cgi_etc_setup.hjson` are
         the setup files that the user will edit, not the ones with `_ref`,
         which are part of git
 
