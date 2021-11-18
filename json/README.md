@@ -464,5 +464,5 @@ the exposure time will indeed be 4x longer than that estimate.
     such changes in the Git updates. You can also read the time stamp
   in the instrumental [tables](../tables/) directory
 
-- Star accessibility will be avaiable soon (ETA: first week of December 2021)
+- Simple observability calculator is now posted publicly [CGI Target Accessibility](https://github.com/nasavbailey/CGI_target_accessibility)
 
