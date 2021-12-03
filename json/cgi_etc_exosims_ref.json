@@ -53,7 +53,7 @@
       "texp": 3,
       "ENF": 1.0,
 	  "THPUT": "tables/THPT_EB_NFB1_200730.csv",
-	  "DET": "tables/DET_CBE_210127.csv"
+	  "DET": "tables/DET_CBE_210614.csv"
     },
     { "name": "OPTI_NF_Imager",
       "QE": "tables/QE_e2v_Spec.csv",
@@ -74,7 +74,7 @@
       "texp": 3,
       "ENF": 1.0,
 	  "THPUT": "tables/THPT_EB_NFB1_200730.csv",
-	  "DET": "tables/DET_CBE_210127.csv"
+	  "DET": "tables/DET_CBE_210614.csv"
     },
     { "name": "CONS_Amici_Spec",
       "QE": "tables/QE_e2v_Spec.csv",
@@ -99,7 +99,7 @@
 	  "Fnum": 52,
       "Rs": 50,
 	  "THPUT": "tables/THPT_EB_SPB3_200730.csv",
-	  "DET": "tables/DET_CBE_210127.csv"
+	  "DET": "tables/DET_CBE_210614.csv"
     },
 	{ "name": "OPTI_Amici_Spec",
       "QE": "tables/QE_e2v_Spec.csv",
@@ -124,7 +124,7 @@
 	  "Fnum": 52,
       "Rs": 50,
 	  "THPUT": "tables/THPT_EB_SPB3_200730.csv",
-	  "DET": "tables/DET_CBE_210127.csv"
+	  "DET": "tables/DET_CBE_210614.csv"
     },
     { "name": "CONS_WF_Imager",
 	  "QE": "tables/QE_e2v_Spec.csv",
@@ -146,7 +146,7 @@
       "ENF": 1.0,
       "Rs": 50,
 	  "THPUT": "tables/THPT_EB_WFB4_200730.csv",
-	  "DET": "tables/DET_CBE_210127.csv"
+	  "DET": "tables/DET_CBE_210614.csv"
     },
     { "name": "OPTI_WF_Imager",
 	  "QE": "tables/QE_e2v_Spec.csv",
@@ -168,7 +168,7 @@
       "ENF": 1.0,
       "Rs": 50,
 	  "THPUT": "tables/THPT_EB_WFB4_200730.csv",
-	  "DET": "tables/DET_CBE_210127.csv"
+	  "DET": "tables/DET_CBE_210614.csv"
     }
 
   ],
@@ -185,11 +185,11 @@
       "koAngles_Earth":[68.0,112.0],
       "koAngles_Moon":[79.0,101.0],
       "koAngles_Small":[1.0,180.0],
-      "occ_trans": "tables/CGPERF_HLC_20190210b.csv",
-      "core_thruput": "tables/CGPERF_HLC_20190210b.csv",
-      "core_mean_intensity": "tables/CGPERF_HLC_20190210b.csv",
-      "core_area": "tables/CGPERF_HLC_20190210b.csv",
-      "core_contrast": "tables/CGPERF_HLC_20190210b.csv",
+      "occ_trans": "tables/CGPERF_HLC_20190210br.csv",
+      "core_thruput": "tables/CGPERF_HLC_20190210br.csv",
+      "core_mean_intensity": "tables/CGPERF_HLC_20190210br.csv",
+      "core_area": "tables/CGPERF_HLC_20190210br.csv",
+      "core_contrast": "tables/CGPERF_HLC_20190210br.csv",
       "core_platescale": 0.30,
 	  "core_stability": "tables/CS_HLC_NFIM_201026.csv",
 	  "core_stability_setting": "REQ"
@@ -206,11 +206,11 @@
       "koAngles_Earth":[68.0,112.0],
       "koAngles_Moon":[79.0,101.0],
       "koAngles_Small":[1.0,180.0],
-      "occ_trans": "tables/CGPERF_HLC_20190210b.csv",
-      "core_thruput": "tables/CGPERF_HLC_20190210b.csv",
-      "core_mean_intensity": "tables/CGPERF_HLC_20190210b.csv",
-      "core_area": "tables/CGPERF_HLC_20190210b.csv",
-      "core_contrast": "tables/CGPERF_HLC_20190210b.csv",
+      "occ_trans": "tables/CGPERF_HLC_20190210br.csv",
+      "core_thruput": "tables/CGPERF_HLC_20190210br.csv",
+      "core_mean_intensity": "tables/CGPERF_HLC_20190210br.csv",
+      "core_area": "tables/CGPERF_HLC_20190210br.csv",
+      "core_contrast": "tables/CGPERF_HLC_20190210br.csv",
       "core_platescale": 0.30,
 	  "core_stability": "tables/CS_HLC_NFIM_200520_SCI.csv",
 	  "core_stability_setting": "MCBE"
