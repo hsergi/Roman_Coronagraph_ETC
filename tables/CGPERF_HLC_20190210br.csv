@@ -1,4 +1,4 @@
-r(lam/D),r(as),intensity,core_contrast,core_thruput,PSF_pk,area(as^2),occ_trans
+rlamD,r_as,intensity,core_contrast,core_thruput,core_mean_intensity,core_area,occ_trans
 3.1,0.155,3.46E-12,5.56E-09,0.02448,0.00037,0.00229,0.24636
 3.2,0.16,2.87E-12,4.08E-09,0.02792,0.00041,0.00234,0.27775
 3.3,0.165,2.38E-12,3.06E-09,0.03062,0.00045,0.00234,0.30486
@@ -58,4 +58,4 @@ r(lam/D),r(as),intensity,core_contrast,core_thruput,PSF_pk,area(as^2),occ_trans
 8.7,0.436,1.99E-12,2.30E-09,0.04309,0.00063,0.00236,0.4258
 8.8,0.441,2.06E-12,2.38E-09,0.04367,0.00063,0.00241,0.42515
 8.9,0.446,2.11E-12,2.46E-09,0.0435,0.00063,0.00241,0.42293
-"# Sampling = 0.1.  This replaces hlc_20190210b,  ""same design..., and its one of the representative case among 100 MC cases intensity run right before CDR. Although lots have changed again (for worse) since then (~April this year), its the latest calculation intensity have.  The resolution has been increased per someones asking. "" -Hanying Zhou, October 11, 2021",,,,,,,
+# Sampling = 0.1.  This replaces hlc_20190210b,  ""same design..., and its one of the representative case among 100 MC cases intensity run right before CDR. Although lots have changed again (for worse) since then (~April this year), its the latest calculation intensity have.  The resolution has been increased per someones asking. "" -Hanying Zhou, October 11, 2021",,,,,,,
