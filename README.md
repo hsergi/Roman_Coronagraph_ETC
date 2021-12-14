@@ -66,8 +66,12 @@ light exoplanets, only.
 - `scripts/`: directory with the `Roman_Coronagraph_ETC` methods.
 [README](scripts/README.md)
 
+- Target accessibility can be derived from
+[CGI Target Accessibility](https://github.com/nasavbailey/CGI_target_accessibility).
+Follow the examples in its Jupyter Notebook.
+
 - List of current [Limitations](json/README.md#limitations) 
-and [Q&A](qanda/README.md)
+and [FAQ](faq/README.md)
 
 # Installation Notes
 

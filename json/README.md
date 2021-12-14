@@ -409,6 +409,14 @@ linear polarization which gives a required exposure time per Wollaston prism
 per telescope roll. Because there are two prisms and two rolls involved,
 the exposure time will indeed be 4x longer than that estimate.
 
+# Target Accessibility
+
+Each target may or may not be accessible ('observable') for the observatory
+depending on the target's coordinates and time of observation. Target
+accessibility is available at
+[CGI Target Accessibility](https://github.com/nasavbailey/CGI_target_accessibility).
+Follow the examples in its Jupyter Notebook.
+
 # Limitations
 
 - `Roman_Coronagraph_ETC` supports the 3 nominal instrumental modes of the
@@ -463,6 +471,4 @@ the exposure time will indeed be 4x longer than that estimate.
     Some of the instrumental performance parameters can change. We will advertise
     such changes in the Git updates. You can also read the time stamp
   in the instrumental [tables](../tables/) directory
-
-- Simple observability calculator is now posted publicly [CGI Target Accessibility](https://github.com/nasavbailey/CGI_target_accessibility)
 
