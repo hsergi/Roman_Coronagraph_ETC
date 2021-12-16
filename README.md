@@ -22,6 +22,9 @@ The Roman Coronagraph Exposure Time Calculator
 
 # Running the Roman Coronagraph ETC
 
+In [IPAC/Roman's page](https://roman.ipac.caltech.edu/sims/ETC.html) you
+can find a presentation and a live tutorial.
+
 - Follow the [Installation Notes](#installation-notes)
 
 - Move to the directory where `Roman_Coronagraph_ETC` is installed
