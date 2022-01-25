@@ -96,7 +96,8 @@ Follow these steps:
 - Install/Update 
 [conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/).
 A common choice is to install miniconda, ~350 Mb, in any directory
-other than `$HOME`. Pick up python 3.7 or more recent
+other than `$HOME`. Pick up python 3.7 if possible because some of the 
+packages from STScI are for 3.7 or less.
 
 - Run these two commands from
 [STScI](https://astroconda.readthedocs.io/en/latest/installation.html#configure-conda-to-use-the-astroconda-channel%20[https://astroconda.readthedocs.io/en/latest/installation.html#configure-conda-to-use-the-astroconda-channel]):
