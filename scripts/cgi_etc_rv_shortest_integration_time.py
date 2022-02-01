@@ -17,6 +17,8 @@ import matplotlib.pyplot as plt
 import pandas as pd 
 # Updated specs for EXOSIMS
 from scripts.cgi_etc_update_specs import cgi_etc_update_specs
+# Linear interpolation
+from scipy import interpolate
 # CSV file
 from scripts.store_csv_file import store_csv_file_rv
 
@@ -79,7 +81,8 @@ def cgi_etc_rv_shortest_integration_time(CGI_epoch0, CGI_epoch1, filterList, jso
     SNRRefList = CGI_Observations['SNRList']
     nSNRRef = len(SNRRefList)
     # SNR list to derive the integration times (fast, no worries if the list is long)
-    # P.S. Developers: This method would allow one to obtain gridded results instead of results for the values in SNRRefList only.
+    # P.S. Developers: This method would allow one to obtain results for a 
+    # grid of values of SNR, instead of results for the values in SNRRefList only.
     #SNRMin = np.min(SNRRefList)
     #SNRMax = np.max(SNRRefList)
     #SNRStep = 0.1
@@ -114,7 +117,7 @@ def cgi_etc_rv_shortest_integration_time(CGI_epoch0, CGI_epoch1, filterList, jso
     # Updating the instrumental specs because of the different post-processing factor for each filter.
         kppTmp, OSTmp, TLTmp, TKTmp = \
         cgi_etc_update_specs(jsonFile, filterList[i_flt],
-        CGI_epoch0, CGI_epoch1)
+            CGI_epoch0, CGI_epoch1)
         kppList[i_flt] = kppTmp
         mode = list(filter(lambda mode: mode['instName'] == filterList[i_flt], OSTmp.observingModes))[0]
         # Local zodi
@@ -126,24 +129,25 @@ def cgi_etc_rv_shortest_integration_time(CGI_epoch0, CGI_epoch1, filterList, jso
             # Reading the CSV file from IMD
             PStr = PName[i_pl]
             # P.S. From IMD: if no inclination available, orbit is assumed edge-on. If no eccentricity is available, orbit is assumed circular. 
-            planetData = pd.read_csv(pathIMD + PStr.replace(' ', '_' ) + '_orbit_data.csv')
-            # Selecting some dates
-            planetTime = planetData['t']
+            planetDataOrig = pd.read_csv(pathIMD + PStr.replace(' ', '_' ) + '_orbit_data.csv')
             # IMD documentation (point 11 in https://plandb.sioslab.com/docs/html/index.html#planetorbits-table)
             # say (sic) "NaN when period of time of periastron passage are undefined"
             # If this is the case skip the planet
-            if np.isnan(planetTime).all() == True:
+            if np.isnan(planetDataOrig['t']).all() == True:
                 print('WARNING: Planet ' + PName[i_pl] + ' has undefined Ephemeris. Skipping it ...')
                 continue
-            deltaT0 = np.abs(planetTime - dayEpoch0)
-            indEpoch0 = np.where(deltaT0 == np.min(deltaT0))[0][0]
-            deltaT1 = np.abs(planetTime - dayEpoch1)
-            indEpoch1 = np.where(deltaT1 == np.min(deltaT1))[0][0]
-            planetDataCgi = planetData[indEpoch0:indEpoch1+1]
-            nPlanetDataCgi = len(planetDataCgi)
-            # Days with data
-            planetTimeCgi = planetTime[indEpoch0:indEpoch1+1]
-            dayEpochArray[i_pl,0:len(planetTimeCgi)] = planetTimeCgi
+            # Creating a new pandas dataframe for each day using linear interpolation
+            dict_tmp = {}
+            dict_tmp['t'] = dayEpoch0 + np.arange(dayEpoch1-dayEpoch0+1)
+            for column in planetDataOrig.columns:
+                if column == 't': continue
+                if isinstance(planetDataOrig[column][0], float):
+                    interpolant = interpolate.interp1d(planetDataOrig['t'],
+                        planetDataOrig[column], kind='linear')
+                    dict_tmp[column] = interpolant(dict_tmp['t'])
+            # database
+            planetDataCgi = pd.DataFrame.from_dict(dict_tmp)
+            dayEpochArray[i_pl,0:len(planetDataCgi)] = planetDataCgi['t']
             # Angular visual separation of the planet
             waArcsec = planetDataCgi['WA'].values / 1000 * u.arcsec
             waArcsecArray[i_pl,0:len(waArcsec)]=waArcsec.value
@@ -153,7 +157,7 @@ def cgi_etc_rv_shortest_integration_time(CGI_epoch0, CGI_epoch1, filterList, jso
             inc_deg = [20] * u.deg
             # Exozodi along the orbit
             fEZ = TLTmp.ZodiacalLight.fEZ(np.array([TLTmp.MV[sInds[i_pl]]]), inc_deg, r_au)
-            fRatio = np.zeros(nPlanetDataCgi)
+            fRatio = np.zeros(len(planetDataCgi['t']))
             # Looping over cloud fsed to get the average flux ratio
             for i_fsed in np.arange(nFsed):
                 # Using the center wavelength of each observing mode to select the corresponding data
@@ -411,3 +415,5 @@ def cgi_etc_rv_shortest_integration_time(CGI_epoch0, CGI_epoch1, filterList, jso
             plt.show()
             if indPlanet2 == nPlanetOK:
                 break
+
+#breakpoint
