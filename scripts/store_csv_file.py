@@ -44,7 +44,7 @@ def store_csv_file_acc(starNameCommon, koGood, len_koEvaltimes, \
 
     df = pd.DataFrame.from_dict(dictCI)
     for star in range(len(starNameCommon)):
-        df[f'{starNameCommon[star]:s} (average, %)'][1:] = np.nan
+        df[f'{starNameCommon[star]:s} (average, %)'] = np.nan
 
     if csvFileName.find('.') < 1:
         csvFileName += '.csv'

@@ -78,7 +78,7 @@ def cgi_etc_star_accessibility(CGI_epoch0, CGI_epoch1, jsonFile,
         obsKO.keepout(TLKO, sIndsKO, koEvaltimes, koangles, True)
     koGood = np.squeeze(tmpkoGood[0]) # Since we are using the same angle constraints for each filter, we can just select the first one
     culprit = tmpCulprit[0]
-    
+
     #creating an array of visibility based on culprit
     sunFault   = culprit[:,:,0]
     moonFault  = culprit[:,:,1]
@@ -89,19 +89,23 @@ def cgi_etc_star_accessibility(CGI_epoch0, CGI_epoch1, jsonFile,
     solarPanelFault  = culprit[:,:,11]
     
     print('Accessibility:')
-    for i_p in np.arange(nPlanets):
-        print('%s (%s): %1.1f %% accessible (Inaccessible due to Solar Panels %1.1f, Sun %1.1f, Moon %1.1f, Earth %1.1f, Mercury %1.1f, Venus %1.1f, Mars %1.1f)' \
-                  % (starNameCommon[i_p], starName[i_p],
-                      np.sum(koGood[i_p]) / len(koEvaltimes) * 100, \
-                      np.sum(solarPanelFault[i_p]) / len(koEvaltimes) * 100, \
-                      np.sum(sunFault[i_p]) / len(koEvaltimes) * 100, \
-                      np.sum(moonFault[i_p]) / len(koEvaltimes) * 100, \
-                      np.sum(earthFault[i_p]) / len(koEvaltimes) * 100, \
-                      np.sum(mercFault[i_p]) / len(koEvaltimes) * 100, \
-                      np.sum(venFault[i_p]) / len(koEvaltimes) * 100, \
-                      np.sum(marsFault[i_p]) / len(koEvaltimes) * 100))
+    if nPlanets == 1:
+        # For 1 planet the indices are different
+        print(f'>> {starNameCommon[0]:s} ({starName[0]:s}): {np.sum(koGood)/len(koEvaltimes)*100:1.1f}% accessible')
+    elif nPlanets > 1:
+        for i_p in np.arange(nPlanets):
+            print('%s (%s): %1.1f %% accessible (Inaccessible due to Solar Panels %1.1f, Sun %1.1f, Moon %1.1f, Earth %1.1f, Mercury %1.1f, Venus %1.1f, Mars %1.1f)' \
+                      % (starNameCommon[i_p], starName[i_p],
+                          np.sum(koGood[i_p]) / len(koEvaltimes) * 100, \
+                          np.sum(solarPanelFault[i_p]) / len(koEvaltimes) * 100, \
+                          np.sum(sunFault[i_p]) / len(koEvaltimes) * 100, \
+                          np.sum(moonFault[i_p]) / len(koEvaltimes) * 100, \
+                          np.sum(earthFault[i_p]) / len(koEvaltimes) * 100, \
+                          np.sum(mercFault[i_p]) / len(koEvaltimes) * 100, \
+                          np.sum(venFault[i_p]) / len(koEvaltimes) * 100, \
+                          np.sum(marsFault[i_p]) / len(koEvaltimes) * 100))
     
     # Write CSV file with accessibility
     store_csv_file_acc(starNameCommon, koGood, len(koEvaltimes), CGI_epoch0, csvFileName)
     
-    
+    return koGood
