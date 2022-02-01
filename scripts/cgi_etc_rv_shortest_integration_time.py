@@ -44,9 +44,9 @@ def cgi_etc_rv_shortest_integration_time(CGI_epoch0, CGI_epoch1, filterList, jso
 
     # Derive the star's accessibility
     # 10/28/21: coming soon
-    #cgi_etc_star_accessibility(CGI_epoch0, CGI_epoch1, jsonFile,
-    #    csvFileName, PName, hipPName)
-
+    accessibleDays = cgi_etc_star_accessibility(CGI_epoch0, CGI_epoch1,
+        jsonFile, csvFileName, PName, hipPName)
+   
     # Write star names
     starName = [''] * nPlanets
     starNameCommon = [''] * nPlanets
@@ -100,7 +100,7 @@ def cgi_etc_rv_shortest_integration_time(CGI_epoch0, CGI_epoch1, filterList, jso
     dayEpoch1 = np.round(365.25 * (CGI_epoch1 - imdEpoch0)).astype(int)
     # Imaging Mission Database says that the orbits are computed every 30 days, but there are cases where this is not the case (02/10/21: https://plandb.sioslab.com/plandetail.php?name=47+UMa+d whose CSV table has steps of 141 days)
     # I just assume it is 1 day, although in general it is larger. No problem. The rest of unused indices are filled with NaN
-    
+
     dayEpochArray = np.empty((nPlanets, dayEpoch1 - dayEpoch0 + 1))
     dayEpochArray.fill(np.nan)
     waArcsecArray = np.empty((nPlanets, dayEpoch1 - dayEpoch0 + 1))
@@ -169,6 +169,12 @@ def cgi_etc_rv_shortest_integration_time(CGI_epoch0, CGI_epoch1, filterList, jso
     
             fRatioArray[i_pl, i_flt,0:len(fRatio)]= np.array(fRatio)
             dMags = -2.5 * np.log10(np.array(fRatio))
+            # Only consider days that are accessible
+            try:
+                dMags[accessibleDays==False]=np.nan
+            # Pass in case accessibility has not been computed
+            except:
+                pass
             # Looping over SNR
             for i_snr in np.arange(nSNR):
                 mode['SNR'] = SNRList[i_snr]
