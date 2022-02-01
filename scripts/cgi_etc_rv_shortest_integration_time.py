@@ -43,7 +43,6 @@ def cgi_etc_rv_shortest_integration_time(CGI_epoch0, CGI_epoch1, filterList, jso
     hipPName = CGI_Observations['hipPName']
 
     # Derive the star's accessibility
-    # 10/28/21: coming soon
     accessibleDays = cgi_etc_star_accessibility(CGI_epoch0, CGI_epoch1,
         jsonFile, csvFileName, PName, hipPName)
    
