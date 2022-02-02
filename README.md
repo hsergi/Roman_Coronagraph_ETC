@@ -71,7 +71,7 @@ light exoplanets, only.
 
 - Target accessibility can be derived from
 
-  -Either 
+  - Either 
 [CGI Target Accessibility](https://github.com/nasavbailey/CGI_target_accessibility).
 Follow the examples in its Jupyter Notebook.
   - Or, the ouput CSV file in `output/csv/` 
