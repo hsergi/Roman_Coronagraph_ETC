@@ -2,7 +2,8 @@
 
 This directory contains two output directories:
 
-- `csv/`: it contains the CSV files with the results of the integration times.
+- `csv/`: it contains the CSV files with the results of the integration times
+and the accessibility of each target.
   [README](csv/README.md)
 
 - `figures/`: in the case of reflected light planets, there is an optional
