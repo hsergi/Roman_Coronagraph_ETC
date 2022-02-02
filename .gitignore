@@ -1,8 +1,10 @@
+!.gitignore
 config.py
 *.swp
 **/.DS_Store
 **/__pycache__
 imd/*.csv
+!imd/HD_219134_h_orbit_data.csv
 json/cgi_etc_setup.hjson
 json/cgi_etc_exosims.json
 json/tmp/*.json
