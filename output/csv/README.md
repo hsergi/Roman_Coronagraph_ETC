@@ -115,6 +115,15 @@ self luminous exoplanets, reflected light exoplanets, and exodust.
     `DoM_(Performance Scenario)_(Instrumental Mode)`
     and `Instrumental mode` in `FR_(instrumental mode) (kpp=value)`
 
+- `SNRMax_(Performance Scenario)_(Instrumental Mode)`:
+    the maximum SNR that can be achieved for each target. It is constrained by
+    either the target's photon rate, the detector noise properties or the time
+    the target is accessible to the observatory.
+
+- `T_(Performance Scenario)_(Instrumental Mode)_SNRMax`: the time in __hours__
+    to achieve the maximum SNR. It is always less than or equal to the time
+    that the target is accessible to the observatory.
+
 - Integration times. `T_(Performance Scenario)_(Instrumental Mode)_SNR(Value)`: the time
     in __hours__ to achieve a SNR equal to `value`
     for the `Performance Scenario` and `Instrumental mode` 
@@ -176,3 +185,7 @@ Notice that the accessibility refers to the host star only, and
     view of the `Instrument Mode`, or if it is _detected_ with
     some SNR.
     The target detectability is given by the integration times.
+
+Alternatively, one can derive the accessibility of the Roman CGI targets
+with [CGI Target Accessibility](https://github.com/nasavbailey/CGI_target_accessibility).
+Follow the examples in its Jupyter Notebook.

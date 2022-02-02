@@ -80,13 +80,13 @@ def cgi_etc_star_accessibility(CGI_epoch0, CGI_epoch1, jsonFile,
     culprit = tmpCulprit[0]
 
     #creating an array of visibility based on culprit
-    sunFault   = culprit[:,:,0]
-    moonFault  = culprit[:,:,1]
+    sunFault  = culprit[:,:,0]
+    moonFault = culprit[:,:,1]
     earthFault = culprit[:,:,2]
-    mercFault  = culprit[:,:,3]
-    venFault   = culprit[:,:,4]
-    marsFault  = culprit[:,:,5]
-    solarPanelFault  = culprit[:,:,11]
+    mercFault = culprit[:,:,3]
+    venFault = culprit[:,:,4]
+    marsFault = culprit[:,:,5]
+    solarPanelFault = culprit[:,:,11]
     
     print('Accessibility:')
     if nPlanets == 1:

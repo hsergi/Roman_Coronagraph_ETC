@@ -70,8 +70,12 @@ light exoplanets, only.
 [README](scripts/README.md)
 
 - Target accessibility can be derived from
+
+  -Either 
 [CGI Target Accessibility](https://github.com/nasavbailey/CGI_target_accessibility).
 Follow the examples in its Jupyter Notebook.
+  - Or, the ouput CSV file in `output/csv/` 
+[README](output/README.md)
 
 - List of current [Limitations](json/README.md#limitations) 
 and [FAQ](faq/README.md)

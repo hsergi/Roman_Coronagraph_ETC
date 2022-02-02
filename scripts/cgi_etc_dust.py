@@ -35,9 +35,8 @@ def cgi_etc_dust(CGI_epoch0, CGI_epoch1, filterList, jsonFile, csvFileName, CGI_
     for idx in range(len(starNameHip)):
         starNameCommonZ[idx] = starNameCommon[idx] + ' z'
         starNameHipZ[idx] = starNameHip[idx] + ' z'
-    # 10/28/21: coming soon
-    #cgi_etc_star_accessibility(CGI_epoch0, CGI_epoch1, jsonFile,
-    #    csvFileName, starNameCommonZ, starNameHipZ)
+    cgi_etc_star_accessibility(CGI_epoch0, CGI_epoch1, jsonFile,
+        csvFileName, starNameCommonZ, starNameHipZ)
 
     WA = CGI_Observations['WA_arcsec'] * u.arcsec
     # Equivalent point-like flux ratios:
