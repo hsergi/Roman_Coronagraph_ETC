@@ -36,8 +36,8 @@ def cgi_etc_sl(CGI_epoch0, CGI_epoch1, filterList, jsonFile,
 
     # Derive the star's accessibility
     # 10/28/21: coming soon
-    #cgi_etc_star_accessibility(CGI_epoch0, CGI_epoch1, jsonFile,
-    #    csvFileName, PName, hipPName)
+    cgi_etc_star_accessibility(CGI_epoch0, CGI_epoch1, jsonFile,
+        csvFileName, PName, hipPName)
     
     # Write star names
     starName = [''] * nPlanets

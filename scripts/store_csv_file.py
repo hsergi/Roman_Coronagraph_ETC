@@ -43,8 +43,9 @@ def store_csv_file_acc(starNameCommon, koGood, len_koEvaltimes, \
             koGood[star]
 
     df = pd.DataFrame.from_dict(dictCI)
+    # Only show the average on the first row
     for star in range(len(starNameCommon)):
-        df[f'{starNameCommon[star]:s} (average, %)'] = np.nan
+        df[f'{starNameCommon[star]:s} (average, %)'][1:] = np.nan
 
     if csvFileName.find('.') < 1:
         csvFileName += '.csv'
@@ -103,11 +104,11 @@ def store_csv_file_sl(filterList, kppList, PNameFilter, WA, d, I,
             for snr in range(len(SNRList)):
                 SNR_str=f'{SNRList[snr]:.1f}'.replace(".","p")
                 dictCI[f'T_{filterList[filter]:s}_SNR{SNR_str:s} ' +
-                        f'(hours)'] = []
+                        '(hours)'] = []
                 for planet in range(len(PNameFilter)):
                     SNR_str=f'{SNRList[snr]:.1f}'.replace(".","p")
                     dictCI[f'T_{filterList[filter]:s}_SNR{SNR_str:s} ' +
-                        f'(hours)'].append(
+                        '(hours)'].append(
                         np.round(intTimeFilterHours[filter][planet][snr],
                         decimals=3))
         if (filterList[filter] == 'CONS_Amici_Spec' \
@@ -119,11 +120,11 @@ def store_csv_file_sl(filterList, kppList, PNameFilter, WA, d, I,
             for snr in range(len(SNRList)):
                 SNR_str=f'{SNRList[snr]:.1f}'.replace(".","p")
                 dictCI[f'T_{filterList[filter]:s}_SNR{SNR_str:s} ' +
-                        f'(hours)'] = []
+                        '(hours)'] = []
                 for planet in range(len(PNameFilter)):
                     SNR_str=f'{SNRList[snr]:.1f}'.replace(".","p")
                     dictCI[f'T_{filterList[filter]:s}_SNR{SNR_str:s} ' +
-                        f'(hours)'].append(
+                        '(hours)'].append(
                         np.round(intTimeFilterHours[filter][planet][snr],
                         decimals=3))
         if (filterList[filter] == 'CONS_WF_Imager' \
@@ -135,11 +136,11 @@ def store_csv_file_sl(filterList, kppList, PNameFilter, WA, d, I,
             for snr in range(len(SNRList)):
                 SNR_str=f'{SNRList[snr]:.1f}'.replace(".","p")
                 dictCI[f'T_{filterList[filter]:s}_SNR{SNR_str:s} ' +
-                        f'(hours)'] = []
+                        '(hours)'] = []
                 for planet in range(len(PNameFilter)):
                     SNR_str=f'{SNRList[snr]:.1f}'.replace(".","p")
                     dictCI[f'T_{filterList[filter]:s}_SNR{SNR_str:s} ' +
-                        f'(hours)'].append(
+                        '(hours)'].append(
                         np.round(intTimeFilterHours[filter][planet][snr],
                         decimals=3))
 
@@ -151,8 +152,8 @@ def store_csv_file_sl(filterList, kppList, PNameFilter, WA, d, I,
 
 def store_csv_file_rv(filterList, kppList, PName,
         dayEpochBestTime, waMasBestTime, fRatioBestTime,
-        SNRList, intTimeBestHours,
-        csvFileName):
+        SNRList, intTimeBestHours, SNRPlanetMax,
+        intTimeSNRMax, csvFileName):
     """
     PURPOSE:
     Script that stores the estimated integration times of reflected light
@@ -165,6 +166,8 @@ def store_csv_file_rv(filterList, kppList, PName,
     #  Day of Mission
     #  WA (mas)
     #  Flux ratio
+    #  SNRMax
+    #  TimetoSNRMax (hours)
     #  TimeToSNR# ... (hours)
     #  ...
     #  TimeToSNR# ... (hours)
@@ -196,14 +199,18 @@ def store_csv_file_rv(filterList, kppList, PName,
                 np.round(waMasBestTime[:,filter, 0, 1], decimals=1)
             dictCI[f'FR_{filterList[filter]:s}'] = \
                 fRatioBestTime[:,filter, 0, 1]
+            dictCI[f'SNRMax_{filterList[filter]:s}'] = \
+                SNRPlanetMax[:,filter]
+            dictCI[f'T_{filterList[filter]:s}_SNRMax (hours)'] = \
+                np.round(intTimeSNRMax[:,filter], decimals=3)
             for snr in range(len(SNRList)):
                 SNR_str=f'{SNRList[snr]:.1f}'.replace(".","p")
                 dictCI[f'T_{filterList[filter]:s}_SNR{SNR_str:s} ' +
-                        f'(hours)'] = []
+                        '(hours)'] = []
                 for planet in range(len(PName)):
                     SNR_str=f'{SNRList[snr]:.1f}'.replace(".","p")
                     dictCI[f'T_{filterList[filter]:s}_SNR{SNR_str:s} ' +
-                        f'(hours)'].append(
+                        '(hours)'].append(
                         np.round(intTimeBestHours[planet][filter][snr],
                         decimals=3))
 
@@ -218,14 +225,18 @@ def store_csv_file_rv(filterList, kppList, PName,
                 np.round(waMasBestTime[:,filter, 0, 1], decimals=1)
             dictCI[f'FR_{filterList[filter]:s}'] = \
                 fRatioBestTime[:,filter, 0, 1]
+            dictCI[f'SNRMax_{filterList[filter]:s}'] = \
+                SNRPlanetMax[:,filter]
+            dictCI[f'T_{filterList[filter]:s}_SNRMax (hours)'] = \
+                np.round(intTimeSNRMax[:,filter], decimals=3)
             for snr in range(len(SNRList)):
                 SNR_str=f'{SNRList[snr]:.1f}'.replace(".","p")
                 dictCI[f'T_{filterList[filter]:s}_SNR{SNR_str:s} ' +
-                        f'(hours)'] = []
+                        '(hours)'] = []
                 for planet in range(len(PName)):
                     SNR_str=f'{SNRList[snr]:.1f}'.replace(".","p")
                     dictCI[f'T_{filterList[filter]:s}_SNR{SNR_str:s} ' +
-                        f'(hours)'].append(
+                        '(hours)'].append(
                         np.round(intTimeBestHours[planet][filter][snr],
                         decimals=3))
 
@@ -240,14 +251,18 @@ def store_csv_file_rv(filterList, kppList, PName,
                 np.round(waMasBestTime[:,filter, 0, 1], decimals=1)
             dictCI[f'FR_{filterList[filter]:s}'] = \
                 fRatioBestTime[:,filter, 0, 1]
+            dictCI[f'SNRMax_{filterList[filter]:s}'] = \
+                SNRPlanetMax[:,filter]
+            dictCI[f'T_{filterList[filter]:s}_SNRMax (hours)'] = \
+                np.round(intTimeSNRMax[:,filter], decimals=3)
             for snr in range(len(SNRList)):
                 SNR_str=f'{SNRList[snr]:.1f}'.replace(".","p")
                 dictCI[f'T_{filterList[filter]:s}_SNR{SNR_str:s} ' +
-                        f'(hours)'] = []
+                        '(hours)'] = []
                 for planet in range(len(PName)):
                     SNR_str=f'{SNRList[snr]:.1f}'.replace(".","p")
                     dictCI[f'T_{filterList[filter]:s}_SNR{SNR_str:s} ' +
-                        f'(hours)'].append(
+                        '(hours)'].append(
                         np.round(intTimeBestHours[planet][filter][snr],
                         decimals=3))
 
@@ -317,11 +332,11 @@ def store_csv_file_ed(filterList, kppList, PNameFilter, WA,
             for snr in range(len(SNRList)):
                 SNR_str=f'{SNRList[snr]:.1f}'.replace(".","p")
                 dictCI[f'T_{filterList[filter]:s}_SNR{SNR_str:s} ' +
-                        f'(hours)'] = []
+                        '(hours)'] = []
                 for planet in range(len(PNameFilter)):
                     SNR_str=f'{SNRList[snr]:.1f}'.replace(".","p")
                     dictCI[f'T_{filterList[filter]:s}_SNR{SNR_str:s} ' +
-                        f'(hours)'].append(
+                        '(hours)'].append(
                         np.round(intTimeFilterHours[filter][planet][snr],
                         decimals=3))
         if (filterList[filter] == 'CONS_WF_Imager' \
@@ -333,11 +348,11 @@ def store_csv_file_ed(filterList, kppList, PNameFilter, WA,
             for snr in range(len(SNRList)):
                 SNR_str=f'{SNRList[snr]:.1f}'.replace(".","p")
                 dictCI[f'T_{filterList[filter]:s}_SNR{SNR_str:s} ' +
-                        f'(hours)'] = []
+                        '(hours)'] = []
                 for planet in range(len(PNameFilter)):
                     SNR_str=f'{SNRList[snr]:.1f}'.replace(".","p")
                     dictCI[f'T_{filterList[filter]:s}_SNR{SNR_str:s} ' +
-                        f'(hours)'].append(
+                        '(hours)'].append(
                         np.round(intTimeFilterHours[filter][planet][snr],
                         decimals=3))
 

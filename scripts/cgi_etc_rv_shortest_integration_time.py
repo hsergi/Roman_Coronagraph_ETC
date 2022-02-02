@@ -79,15 +79,12 @@ def cgi_etc_rv_shortest_integration_time(CGI_epoch0, CGI_epoch1, filterList, jso
     # SNR list
     SNRRefList = CGI_Observations['SNRList']
     nSNRRef = len(SNRRefList)
-    # SNR list to derive the integration times (fast, no worries if the list is long)
-    # P.S. Developers: This method would allow one to obtain results for a 
-    # grid of values of SNR, instead of results for the values in SNRRefList only.
-    #SNRMin = np.min(SNRRefList)
-    #SNRMax = np.max(SNRRefList)
-    #SNRStep = 0.1
-    #SNRList = np.arange(SNRMin, SNRMax + SNRStep, SNRStep)
-    # For now simply copy the SNR list from the configurtion file
-    SNRList = SNRRefList 
+    # SNR list to derive the integration times (fast, no worries)
+    # Grid of values of SNR, instead of results for the values in SNRRefList only.
+    # P.S. Small SNR values are used to highlight cases that are not worth
+    # observing
+    SNRList = np.sort(np.concatenate([SNRRefList, np.arange(0.5,20,0.5),
+        np.arange(20,105,5)], axis=0))
     nSNR = len(SNRList)
     # Keeping track of the SNR actually found (in general, it should be the same as 
     # in SNRRefList but they are the values in SNRList closest to SNRRefList)
@@ -185,6 +182,7 @@ def cgi_etc_rv_shortest_integration_time(CGI_epoch0, CGI_epoch1, filterList, jso
     np.seterr(divide='warn', invalid='warn')
     
     # Summarize results
+    nSNRRef = len(SNRRefList)
     # The Epoch of observation, WA, and flux ratio do not change with SNR
     dayEpochBestTime = np.empty((nPlanets, nFilters, nSNR, 3))
     dayEpochBestTime.fill(np.nan)
@@ -204,49 +202,94 @@ def cgi_etc_rv_shortest_integration_time(CGI_epoch0, CGI_epoch1, filterList, jso
     
     for i_pl in np.arange(nPlanets):
         for i_flt in np.arange(nFilters):
-            for i_snr in np.arange(nSNR):
+            i_snr_2 = 0
+            for snr in SNRRefList:
+                i_snr = int(np.where(np.abs(snr - SNRList) == \
+                    np.min(np.abs(snr - SNRList)))[0][0])
                 # Finding the shortest integration time
                 # If all are NaN, skip
                 if (np.isnan(intTimeFilterHours[i_pl, i_flt, i_snr]).all()) == True:
                     continue
                 indBest = np.where(intTimeFilterHours[i_pl, i_flt, i_snr] == np.nanmin(intTimeFilterHours[i_pl, i_flt, i_snr]))
                 if (indBest[0].size != 0):
-                    dayEpochBestTime[i_pl, i_flt, i_snr, 1] = dayEpochArray[i_pl, indBest]
-                    dayOperationalBestTime[i_pl, i_flt, i_snr, 1] = dayEpochArray[i_pl, indBest]
-                    waMasBestTime[i_pl, i_flt, i_snr, 1] = waArcsecArray[i_pl, indBest] * 1000 # arcsec to milli-arcsec
-                    fRatioBestTime[i_pl, i_flt, i_snr, 1] = fRatioArray[i_pl, i_flt, indBest]
-                    intTimeBestHours[i_pl, i_flt, i_snr] = intTimeFilterHours[i_pl, i_flt, i_snr, indBest]
+                    dayEpochBestTime[i_pl, i_flt, i_snr_2, 1] = dayEpochArray[i_pl, indBest]
+                    dayOperationalBestTime[i_pl, i_flt, i_snr_2, 1] = dayEpochArray[i_pl, indBest]
+                    waMasBestTime[i_pl, i_flt, i_snr_2, 1] = waArcsecArray[i_pl, indBest] * 1000 # arcsec to milli-arcsec
+                    fRatioBestTime[i_pl, i_flt, i_snr_2, 1] = fRatioArray[i_pl, i_flt, indBest]
+                    intTimeBestHours[i_pl, i_flt, i_snr_2] = intTimeFilterHours[i_pl, i_flt, i_snr, indBest]
                     # Filling out the values before/after the best time
-                    dayEpochBestTime[i_pl, i_flt, i_snr, 0] = dayEpochBestTime[i_pl, i_flt, i_snr, 1] - intTimeBestHours[i_pl, i_flt, i_snr] / 24 / 2
+                    dayEpochBestTime[i_pl, i_flt, i_snr_2, 0] = dayEpochBestTime[i_pl, i_flt, i_snr, 1] - intTimeBestHours[i_pl, i_flt, i_snr] / 24 / 2
                     # In case the first date is before the mission start
-                    if dayEpochBestTime[i_pl, i_flt, i_snr, 0] < 0:
-                        dayEpochBestTime[i_pl, i_flt, i_snr, 0] = 0
-                        dayEpochBestTime[i_pl, i_flt, i_snr, 2] = dayEpochBestTime[i_pl, i_flt, i_snr, 1] + intTimeBestHours[i_pl, i_flt, i_snr] / 24
+                    if dayEpochBestTime[i_pl, i_flt, i_snr_2, 0] < 0:
+                        dayEpochBestTime[i_pl, i_flt, i_snr_2, 0] = 0
+                        dayEpochBestTime[i_pl, i_flt, i_snr_2, 2] = dayEpochBestTime[i_pl, i_flt, i_snr_2, 1] + intTimeBestHours[i_pl, i_flt, i_snr_2] / 24
                     else:
-                        dayEpochBestTime[i_pl, i_flt, i_snr, 2] = dayEpochBestTime[i_pl, i_flt, i_snr, 1] + intTimeBestHours[i_pl, i_flt, i_snr] / 24 / 2
+                        dayEpochBestTime[i_pl, i_flt, i_snr_2, 2] = dayEpochBestTime[i_pl, i_flt, i_snr_2, 1] + intTimeBestHours[i_pl, i_flt, i_snr_2] / 24 / 2
                     # Operational days have a fudge factor
-                    dayOperationalBestTime[i_pl, i_flt, i_snr, 0] = dayEpochBestTime[i_pl, i_flt, i_snr, 1] - ( 1 / fOperation) * intTimeBestHours[i_pl, i_flt, i_snr] / 24 / 2
+                    dayOperationalBestTime[i_pl, i_flt, i_snr_2, 0] = dayEpochBestTime[i_pl, i_flt, i_snr_2, 1] - ( 1 / fOperation) * intTimeBestHours[i_pl, i_flt, i_snr_2] / 24 / 2
                     # In case the first date is before the mission start
-                    if dayOperationalBestTime[i_pl, i_flt, i_snr, 0] < 0:
-                        dayOperationalBestTime[i_pl, i_flt, i_snr, 0] = 0
-                        dayOperationalBestTime[i_pl, i_flt, i_snr, 2] = dayEpochBestTime[i_pl, i_flt, i_snr, 1] + ( 1 / fOperation ) * intTimeBestHours[i_pl, i_flt, i_snr] / 24
+                    if dayOperationalBestTime[i_pl, i_flt, i_snr_2, 0] < 0:
+                        dayOperationalBestTime[i_pl, i_flt, i_snr_2, 0] = 0
+                        dayOperationalBestTime[i_pl, i_flt, i_snr_2, 2] = dayEpochBestTime[i_pl, i_flt, i_snr_2, 1] + ( 1 / fOperation ) * intTimeBestHours[i_pl, i_flt, i_snr_2] / 24
                     else:
-                        dayOperationalBestTime[i_pl, i_flt, i_snr, 2] = dayEpochBestTime[i_pl, i_flt, i_snr, 1] + ( 1 / fOperation ) * intTimeBestHours[i_pl, i_flt, i_snr] / 24 / 2
+                        dayOperationalBestTime[i_pl, i_flt, i_snr_2, 2] = dayEpochBestTime[i_pl, i_flt, i_snr_2, 1] + ( 1 / fOperation ) * intTimeBestHours[i_pl, i_flt, i_snr_2] / 24 / 2
                     
-                    waMasBestTime[i_pl, i_flt, i_snr, 0] = np.interp(dayEpochBestTime[i_pl, i_flt, i_snr, 0], 
+                    waMasBestTime[i_pl, i_flt, i_snr_2, 0] = np.interp(dayEpochBestTime[i_pl, i_flt, i_snr_2, 0], 
                                                               dayEpochArray[i_pl,~np.isnan(dayEpochArray[i_pl])], 
                                                               1000 * waArcsecArray[i_pl,~np.isnan(dayEpochArray[i_pl])])
-                    waMasBestTime[i_pl, i_flt, i_snr, 2] = np.interp(dayEpochBestTime[i_pl, i_flt, i_snr, 2], 
+                    waMasBestTime[i_pl, i_flt, i_snr_2, 2] = np.interp(dayEpochBestTime[i_pl, i_flt, i_snr_2, 2], 
                                                               dayEpochArray[i_pl,~np.isnan(dayEpochArray[i_pl])], 
                                                               1000 * waArcsecArray[i_pl,~np.isnan(dayEpochArray[i_pl])])
-                    fRatioBestTime[i_pl, i_flt, i_snr, 0] = np.interp(dayEpochBestTime[i_pl, i_flt, i_snr, 0], 
+                    fRatioBestTime[i_pl, i_flt, i_snr_2, 0] = np.interp(dayEpochBestTime[i_pl, i_flt, i_snr_2, 0], 
                                                               dayEpochArray[i_pl,~np.isnan(dayEpochArray[i_pl])], 
                                                               fRatioArray[i_pl, i_flt, ~np.isnan(dayEpochArray[i_pl])])
-                    fRatioBestTime[i_pl, i_flt, i_snr, 2] = np.interp(dayEpochBestTime[i_pl, i_flt, i_snr, 2], 
+                    fRatioBestTime[i_pl, i_flt, i_snr_2, 2] = np.interp(dayEpochBestTime[i_pl, i_flt, i_snr_2, 2], 
                                                               dayEpochArray[i_pl, ~np.isnan(dayEpochArray[i_pl])], 
                                                               fRatioArray[i_pl, i_flt, ~np.isnan(dayEpochArray[i_pl])])
-                    
+                # Update counter of SNR provided by the user
+                i_snr_2 += 1    
+
+    # Getting the maximum time that the target is accessible and its SNR
+    SNRPlanetMax = np.empty((nPlanets, nFilters))
+    SNRPlanetMax.fill(np.min(SNRList))
+    intTimeSNRMax = np.empty((nPlanets, nFilters))
+    intTimeSNRMax.fill(np.nan)
+    intTmpHours = np.empty((nSNR))
+    intTmpHours.fill(np.nan)
+    for i_pl in np.arange(nPlanets):
+        # Days that the target is accessible
+        if nPlanets == 1:
+           nDaysPlanet = np.sum(accessibleDays)
+        else:
+           nDaysPlanet = np.sum(accessibleDays[i_pl])
+        for i_flt in np.arange(nFilters):
+           for i_snr in np.arange(nSNR):
+               # Shortest integration time within accessible times
+               intTmpHours[i_snr] = \
+                   np.nanmin(intTimeFilterHours[i_pl, i_flt, i_snr, :])
+               # First time that it is not possible to achieve an SNR,
+               # it means that the previous step was the largest value
+               if np.isnan(intTmpHours[i_snr]) == False:
+                   # If the integration time fits within the accessibility window
+                   if intTmpHours[i_snr] <= (nDaysPlanet*24):
+                       SNRPlanetMax[i_pl, i_flt] = SNRList[i_snr]
+                       intTimeSNRMax[i_pl, i_flt] = intTmpHours[i_snr]
+                   else:
+                       SNRInterpolant = interpolate.interp1d(
+                           intTmpHours[0:i_snr+1], SNRList[0:i_snr+1],
+                           kind='linear')
+                       # Rount to 1 decimal place (it's SNR)
+                       SNRPlanetMax[i_pl, i_flt] = \
+                           np.round(SNRInterpolant(nDaysPlanet*24), decimals=1)
+                       intTimeSNRMax[i_pl, i_flt] = nDaysPlanet*24
     
+    # Replace bad cases by NaN now
+    for i_pl in np.arange(nPlanets):
+        for i_flt in np.arange(nFilters):
+            if SNRPlanetMax[i_pl, i_flt] == np.min(SNRList):
+                SNRPlanetMax[i_pl, i_flt] = np.nan
+                intTimeSNRMax[i_pl, i_flt]= np.nan
+
     # Maximum integration times in hours (used for plotting)
     maxIntTimeHours = CGI_Observations['maxIntTimeHours'] # maximum CI allocation time for a single target
     
@@ -272,8 +315,8 @@ def cgi_etc_rv_shortest_integration_time(CGI_epoch0, CGI_epoch1, filterList, jso
     ###################################
     store_csv_file_rv(filterList, kppList, PName,
         dayEpochBestTime, waMasBestTime, fRatioBestTime,
-        SNRRefList, intTimeBestHours,
-        csvFileName)
+        SNRRefList, intTimeBestHours, SNRPlanetMax,
+        intTimeSNRMax, csvFileName)
     
     ###############################################
     # Plotting the results for the most favorable #
