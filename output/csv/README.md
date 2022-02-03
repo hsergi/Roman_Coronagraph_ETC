@@ -94,7 +94,9 @@ self luminous exoplanets, reflected light exoplanets, and exodust.
 - `DoM_(Performance Scenario)_(Instrumental Mode)`: 
     the number of days after the first
     epoch,  set in `json/cgi_etc_setup.hjson`,
-    with the shortest integration time to achive the SNR goal.
+    with the shortest integration time to achive the SNR goal. The date is
+    always within an accessible period, i.e, when the observatory can point
+    to the target.
     `Instrumental Mode` is defined in `FR_(instrumental mode) (kpp=value)`.
     The `Performance Scenario` can be
     either `OPTI` for optimistic, or `CONS` for conservative.
