@@ -140,7 +140,16 @@ def cgi_etc_rv_shortest_integration_time(CGI_epoch0, CGI_epoch1, filterList, jso
                 if isinstance(planetDataOrig[column][0], float):
                     interpolant = interpolate.interp1d(planetDataOrig['t'],
                         planetDataOrig[column], kind='linear')
-                    dict_tmp[column] = interpolant(dict_tmp['t'])
+                    # IMD ephemeris may have more than 1 orbit
+                    try:
+                        orbital_period = np.where(planetDataOrig['t']==0)[0]
+                        orbital_period_days = \
+                            planetDataOrig['t'][orbital_period[1]-1] - \
+                            planetDataOrig['t'][orbital_period[0]]
+                        dict_tmp[column] = \
+                            interpolant(dict_tmp['t'] % orbital_period_days)
+                    except:
+                        dict_tmp[column] = interpolant(dict_tmp['t'])
             # database
             planetDataCgi = pd.DataFrame.from_dict(dict_tmp)
             dayEpochArray[i_pl,0:len(planetDataCgi)] = planetDataCgi['t']
