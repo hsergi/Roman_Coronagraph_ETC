@@ -320,8 +320,7 @@ Imaging Mission Simulator," Astrophysics Source Code Library, 6, 2017.
 
 - Dean Keithly, D. Savransky, D. Garrett, C. Delacroix, G. Soto,
 "Optimal scheduling of exoplanet direct imaging single-visit observations 
-of a blind search survey," 
-J. of Astronomical Telescopes, Instruments, and Systems, 6(2), 027001,
+of a blind search survey,"  J. of Astronomical Telescopes, Instruments, and Systems, 6(2), 027001,
 (2020). 
 [doi:10.1117/1/JATIS.6.2.027001](https://doi.org/10.1117/1.JATIS.6.2.027001)
 
@@ -330,4 +329,14 @@ J. of Astronomical Telescopes, Instruments, and Systems, 6(2), 027001,
 "WFIRST-AFTA coronagraph science yield modeling with EXOSIMS,"
 J. of Astronomical Telescopes, Instruments, and Systems, 2(1), 011006,
 (2015). [doi:10.1117/1.JATIS.2.1.011006](https://doi.org/10.1117/1.JATIS.2.1.011006)
+
+# Use Policy
+
+If you use this code in presentations or publications, please adhere to the follwing policy use:
+
+- Add the 5 references posted on the bibliography section on GitHub: bibliography
+ 
+- If data from Imaging Mission Database were used, adhere to their use policy: IMD policy
+ 
+- Cite the ACSL entry of the Roman CGI ETC tool: https://ascl.net/code/v/3217
 
