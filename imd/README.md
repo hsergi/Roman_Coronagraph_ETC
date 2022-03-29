@@ -9,7 +9,7 @@ levels of cloud density, see the
 in [Imaging Mission Database](https://plandb.sioslab.com/index.php). 
 It also provides completeness predictions for the different 
 instrumental performance scenarios covered by this ETC, namely:
-conservatuve and optimistic.
+conservative and optimistic.
 
 # Filenames and Planet Names in the Setup File
 
