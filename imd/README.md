@@ -6,7 +6,10 @@ that provide information about the planet's ephemeris,
 the star-planet flux ratio along the orbit, for different
 levels of cloud density, see the 
 [documentation](https://plandb.sioslab.com/docs/html/index.html) 
-in [Imaging Mission Database](https://plandb.sioslab.com/index.php).
+in [Imaging Mission Database](https://plandb.sioslab.com/index.php). 
+It also provides completeness predictions for the different 
+instrumental performance scenarios covered by this ETC, namely:
+conservatuve and optimistic.
 
 # Filenames and Planet Names in the Setup File
 
