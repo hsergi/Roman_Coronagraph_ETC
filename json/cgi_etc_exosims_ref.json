@@ -191,7 +191,7 @@
       "core_area": "tables/CGPERF_HLC_20190210b.csv",
       "core_contrast": "tables/CGPERF_HLC_20190210b.csv",
       "core_platescale": 0.30,
-	  "core_stability": "tables/CS_HLC_NFIM_201026.csv",
+	  "core_stability": "tables/CS_HLC_NFIM_220427.csv",
 	  "core_stability_setting": "REQ"
     },
     { "name": "OPTI_HLC-565",
