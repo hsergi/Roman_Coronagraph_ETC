@@ -254,7 +254,7 @@ free documentation of each third-party software.
   - Roman Coronagraph ETC: move to the installation directory,
         for instance, `/Users/user_name/.../GitHub/`
     - Execute `git clone https://github.com/hsergi/Roman_Coronagraph_ETC.git`.
-        Use the token generated before or geenrate a new token following
+        Use the token generated before or generate a new token following
         similar steps as explained before
 
 - If you already have `astropy` installed, it's usually convenient to keep 

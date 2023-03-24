@@ -106,7 +106,8 @@ def cgi_etc_rv_shortest_integration_time(CGI_epoch0, CGI_epoch1, filterList, jso
     intTimeFilterHours = np.empty((nPlanets, nFilters, nSNR, dayEpoch1 - dayEpoch0 + 1))
     intTimeFilterHours.fill(np.nan)
     sInds = np.empty(nPlanets, dtype=int)
-    sInds.fill(np.nan)
+    # numpy 1.24 does not allow to initialize integers with NaN. Choosing an absurd value
+    sInds.fill(10000)
     
     # Looping over filters
     for i_flt in np.arange(nFilters):
@@ -311,7 +312,8 @@ def cgi_etc_rv_shortest_integration_time(CGI_epoch0, CGI_epoch1, filterList, jso
     
     # Selecting the planets with some integration time
     indPlanetOK = np.empty(0, dtype=int)
-    indPlanetOK.fill(np.nan)
+    # numpy 1.24 does not allow to initialize integers with NaN. Choosing an absurd value
+    indPlanetOK.fill(10000)
     # Sentinel
     i_pl_OK = 0
     for i_pl in np.arange(nPlanets):
