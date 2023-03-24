@@ -43,7 +43,8 @@ def cgi_etc_star_accessibility(CGI_epoch0, CGI_epoch1, jsonFile,
     
     # Indices where the star is
     sIndsKO = np.empty(nPlanets, dtype=int)
-    sIndsKO.fill(np.nan)
+    # numpy 1.24 does not allow to initialize integers with NaN. Choosing an absurd value
+    sIndsKO.fill(10000)
     for i_pl in np.arange(nPlanets):
         sIndsKO[i_pl] = np.where(TLKO.Name == starName[i_pl])[0]
     
