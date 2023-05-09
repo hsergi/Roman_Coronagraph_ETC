@@ -53,7 +53,8 @@
       "texp": 3,
       "ENF": 1.0,
 	  "THPUT": "tables/THPT_EB_NFB1_200730.csv",
-	  "DET": "tables/DET_CBE_210127.csv"
+	  "DET": "tables/DET_CBE_210127.csv",
+    "dQE": 0.399
     },
     { "name": "OPTI_NF_Imager",
       "QE": "tables/QE_e2v_Spec.csv",
@@ -99,7 +100,8 @@
 	  "Fnum": 52,
       "Rs": 50,
 	  "THPUT": "tables/THPT_EB_SPB3_200730.csv",
-	  "DET": "tables/DET_CBE_210127.csv"
+	  "DET": "tables/DET_CBE_210127.csv",
+    "dQE": 0.39
     },
 	{ "name": "OPTI_Amici_Spec",
       "QE": "tables/QE_e2v_Spec.csv",
@@ -146,7 +148,8 @@
       "ENF": 1.0,
       "Rs": 50,
 	  "THPUT": "tables/THPT_EB_WFB4_200730.csv",
-	  "DET": "tables/DET_CBE_210127.csv"
+	  "DET": "tables/DET_CBE_210127.csv",
+    "dQE": 0.203
     },
     { "name": "OPTI_WF_Imager",
 	  "QE": "tables/QE_e2v_Spec.csv",
